@@ -360,7 +360,7 @@ export default function reducer(state = initialState, action) {
 export function viewAllProcesses(_fetch=fetch) {
     return async function sideEffect(dispatch) {
         dispatch({type: SERVICE_START})
-        const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/findAllProcesses`
+        const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/findAllProcesses`
         const response = await _fetch(url)
         if (response.ok) {
             const result = await response.json()
@@ -375,10 +375,10 @@ export function viewAllProcesses(_fetch=fetch) {
 export function deleteProcess(processID, _fetch1=fetch, _fetch2=fetch) {
     return async function sideEffect(dispatch, getState) {
         dispatch({type: SERVICE_START})
-        const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/deleteProcess?processID=${processID}`
+        const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/deleteProcess?processID=${processID}`
         const response = await _fetch1(url)
         if (response.ok) {
-            const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/deleteAllByProcessID?processID=${processID}`
+            const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/deleteAllByProcessID?processID=${processID}`
             const response = await _fetch2(url)
             if (response.ok) {
                 const processesAry = getState().processes.processesAry
@@ -414,7 +414,7 @@ export function addProcess(_fetch1=fetch, _fetch2=fetch) {
             }
             else {
                 const tempOrder = ""
-                const url1 = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/addProcess?title=${tempTitle}&stageOrder=${tempOrder}`
+                const url1 = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/addProcess?title=${tempTitle}&stageOrder=${tempOrder}`
                 const processResponse = await _fetch1(url1)
                 if (processResponse.ok) {
                     const processResult = await processResponse.json()
@@ -422,7 +422,7 @@ export function addProcess(_fetch1=fetch, _fetch2=fetch) {
                     for (let i = 0; i < tempAry.length; i++) {
                         tempAry[i].processID = processID
                     }
-                    const url2 = `http://localhost:2/addAllStages`
+                    const url2 = `https://localhost:2/addAllStages`
                     const stageResponse = await _fetch2(url2, {
                         method: 'POST',
                         headers: {
@@ -474,7 +474,7 @@ export function addStageToStagesAry(_fetch=fetch) {
                     if (state.processes.activityTask === "addEditStage") {
                         const index = state.processes.processToViewIndex
                         tempStage.processID = state.processes.processesAry[index].processID
-                        const url1 = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/editStage?stageID=${tempStage.stageID}&processID=${tempStage.processID}&stageOrder=${tempStage.stageOrder}` +
+                        const url1 = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/editStage?stageID=${tempStage.stageID}&processID=${tempStage.processID}&stageOrder=${tempStage.stageOrder}` +
                             `&stageType=${tempStage.stageType}&question=${tempStage.question}&mcOption1=${tempStage.mcOption1}&mcOption2=${tempStage.mcOption2}` +
                             `&mcOption3=${tempStage.mcOption3}`
                         const response = await _fetch(url1)
@@ -498,7 +498,7 @@ export function addStageToStagesAry(_fetch=fetch) {
 export function viewOneProcess(process, index, _fetch=fetch) {
     return async function sideEffect(dispatch) {
         dispatch({type: SERVICE_START})
-        const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/findAllStagesByProcessID?processID=${process.processID}`
+        const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/findAllStagesByProcessID?processID=${process.processID}`
         const response = await _fetch(url)
         if (response.ok) {
             const result = await response.json()
@@ -514,7 +514,7 @@ export function viewOneProcess(process, index, _fetch=fetch) {
 export function viewAllFinished(_fetch=fetch) {
     return async function sideEffect(dispatch) {
         dispatch({type: SERVICE_START})
-        const url = `http://process-manager-resource-dd3ea938a14b.herokuapp.com/findAllFinishedProcesses`
+        const url = `https://process-manager-resource-dd3ea938a14b.herokuapp.com/findAllFinishedProcesses`
         const response = await _fetch(url)
         if (response.ok) {
             const result = await response.json()
@@ -529,7 +529,7 @@ export function viewAllFinished(_fetch=fetch) {
 export function viewOneFinishedProcess(process, index, _fetch=fetch) {
     return async function sideEffect(dispatch) {
         dispatch({type: SERVICE_START})
-        const url = `http://process-manager-resource-dd3ea938a14b.herokuapp.com/findAllFinishedStagesByToken?token=${process.token}`
+        const url = `https://process-manager-resource-dd3ea938a14b.herokuapp.com/findAllFinishedStagesByToken?token=${process.token}`
         const response = await _fetch(url)
         if (response.ok) {
             const result = await response.json()
@@ -548,7 +548,7 @@ export function editProcess(_fetch=fetch) {
         const title = state.newProcessTitle
         const processID = state.processToEdit.processID
         const stageOrder = state.processToEdit.stageOrder
-        const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/editProcess?processID=${processID}&title=${title}&stageOrder=${stageOrder}`
+        const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/editProcess?processID=${processID}&title=${title}&stageOrder=${stageOrder}`
         const processResponse = await _fetch(url)
         if (processResponse.ok) {
             const processesAry = state.processesAry
@@ -580,7 +580,7 @@ export function editStage(_fetch=fetch) {
 
         } else {
 
-            const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/editStage?stageID=${stageID}&processID=${processID}&stageOrder=${stageOrder}` +
+            const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/editStage?stageID=${stageID}&processID=${processID}&stageOrder=${stageOrder}` +
                 `&stageType=${stageType}&question=${question}&mcOption1=${mcOption1}&mcOption2=${mcOption2}&mcOption3=${mcOption3}`
             const response = await _fetch(url)
             if (response.ok) {
@@ -606,7 +606,7 @@ export function deleteStage(stageID, _fetch1=fetch, _fetch2=fetch) {
             dispatch({type: SERVICE_FAILURE})
         }
         else {
-            const url1 = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/deleteStage?stageID=${stageID}`
+            const url1 = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/deleteStage?stageID=${stageID}`
             const deleteResponse = await _fetch1(url1)
             if (deleteResponse.ok) {
                 let tempAry = stagesAry.filter((stage) => {
@@ -615,7 +615,7 @@ export function deleteStage(stageID, _fetch1=fetch, _fetch2=fetch) {
                 for (let i = 0; i < tempAry.length; i++) {
                     tempAry[i].stageOrder = i;
                 }
-                const url2 = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
+                const url2 = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
                 const saveResponse = await _fetch2(url2, {
                     method: 'POST',
                     headers: {
@@ -652,7 +652,7 @@ export function reorderStages(direction, stageOrder, _fetch=fetch) {
                 tempAry[stageOrder] = tempStage
                 tempAry[stageOrder-1].stageOrder = stageOrder-1
                 tempAry[stageOrder].stageOrder = stageOrder
-                const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
+                const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
                 const stageResponse = await _fetch(url, {
                     method: 'POST',
                     headers: {
@@ -676,7 +676,7 @@ export function reorderStages(direction, stageOrder, _fetch=fetch) {
                 tempAry[stageOrder] = tempStage
                 tempAry[stageOrder+1].stageOrder = stageOrder+1
                 tempAry[stageOrder].stageOrder = stageOrder
-                const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
+                const url = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
                 const stageResponse = await _fetch(url, {
                     method: 'POST',
                     headers: {
