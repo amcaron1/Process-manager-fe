@@ -422,7 +422,7 @@ export function addProcess(_fetch1=fetch, _fetch2=fetch) {
                     for (let i = 0; i < tempAry.length; i++) {
                         tempAry[i].processID = processID
                     }
-                    const url2 = `https://localhost:2/addAllStages`
+                    const url2 = `https://process-manager-process-c2ef4b02eb4c.herokuapp.com/addAllStages`
                     const stageResponse = await _fetch2(url2, {
                         method: 'POST',
                         headers: {
