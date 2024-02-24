@@ -136,7 +136,7 @@ export default function reducer(state = initialState, action) {
 
 export function viewFollowerProcesses(_fetch=fetch) {
     return async function sideEffect(dispatch) {
-        const url = `http://localhost:8082/findAllProcesses`
+        const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/findAllProcesses`
         const response = await _fetch(url)
         if (response.ok) {
             const result = await response.json()
@@ -149,7 +149,7 @@ export function viewFollowerProcesses(_fetch=fetch) {
 
 export function followProcess(process, index, _fetch=fetch) {
     return async function sideEffect(dispatch) {
-        const url = `http://localhost:8082/findAllStagesByProcessID?processID=${process.processID}`
+        const url = `http://process-manager-process-c2ef4b02eb4c.herokuapp.com/findAllStagesByProcessID?processID=${process.processID}`
         const response = await _fetch(url)
         if (response.ok) {
             const result = await response.json()
@@ -202,7 +202,7 @@ export function saveStage(_fetch1=fetch, _fetch2=fetch) {
         else {
             if (index === 0) {
                 // first save
-                const url1 = `http://localhost:8081/saveFirstFinishedStage?question=${question}&stageType=${stageType}` +
+                const url1 = `http://process-manager-resource-dd3ea938a14b.herokuapp.com/saveFirstFinishedStage?question=${question}&stageType=${stageType}` +
                     `&textAnswer=${textAnswer}&booleanAnswer=${booleanAnswer}&mcAnswer=${mcAnswer}&stageOrder=${stageOrder}`
                 const response = await _fetch1(url1)
                 if (response.ok) {
@@ -214,7 +214,7 @@ export function saveStage(_fetch1=fetch, _fetch2=fetch) {
                 }
             } else {
                 // regular save
-                const url2 = `http://localhost:8081/saveFinishedStage?token=${token}&question=${question}&stageType=${stageType}` +
+                const url2 = `http://process-manager-resource-dd3ea938a14b.herokuapp.com/saveFinishedStage?token=${token}&question=${question}&stageType=${stageType}` +
                     `&textAnswer=${textAnswer}&booleanAnswer=${booleanAnswer}&mcAnswer=${mcAnswer}&stageOrder=${stageOrder}`
                 const response = await _fetch2(url2)
                 if (response.ok) {
@@ -235,7 +235,7 @@ export function saveProcess(_fetch=fetch) {
         const token = state.responses.token
         const title = tempAry[index].title
 
-        const url = `http://localhost:8081/saveFinishedProcess?token=${token}&title=${title}`
+        const url = `http://process-manager-resource-dd3ea938a14b.herokuapp.com/saveFinishedProcess?token=${token}&title=${title}`
         const response = await _fetch(url)
         if (response.ok) {
             dispatch({type: RESET_AFTER_PROCESS_SAVE})
